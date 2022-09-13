@@ -33,6 +33,13 @@ type HostSet struct {
 	Total int
 }
 
+func NewHost() *Host {
+	return &Host{
+		Resource: &Resource{},
+		Describe: &Describe{},
+	}
+}
+
 // Host model 定义
 type Host struct {
 	// 资源公共属性部分
@@ -83,4 +90,3 @@ type Describe struct {
 	OSName       string `json:"os_name"`       // 操作系统名称
 	SerialNumber string `json:"serial_number"` // 序列号
 }
-
