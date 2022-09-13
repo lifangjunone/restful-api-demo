@@ -1,7 +1,7 @@
 package impl
 
 import (
-	"log"
+	"go.uber.org/zap"
 	"restful-api-demo/apps/host"
 )
 
@@ -9,11 +9,14 @@ import (
 var _ host.Service = (*HostServiceImpl)(nil)
 
 func NewHostServiceImpl() *HostServiceImpl {
+	logger, _ := zap.NewProduction()
+	defer logger.Sync()
+	sugar := logger.Sugar()
 	return &HostServiceImpl{
-		l: log.Logger{},
+		l: sugar,
 	}
 }
 
 type HostServiceImpl struct {
-	l log.Logger
+	l *zap.SugaredLogger
 }

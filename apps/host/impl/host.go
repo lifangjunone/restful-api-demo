@@ -6,7 +6,7 @@ import (
 )
 
 func (i *HostServiceImpl) CreateHost(ctx context.Context, ins *host.Host) (*host.Host, error) {
-	i.l.Print("start crate host")
+	i.l.Info("start crate host")
 	return nil, nil
 }
 
