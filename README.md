@@ -7,7 +7,7 @@ go restful api demo
 |-conf                        # 程序配置文件
 |-protocol                    # 程序监听的协议
 |-version                     # 程序自身的版本信息
-|-pkg                         # 业务包
+|-app                         # 业务包
 | |-host
 |   |-model                   # 业务需要的数据模型
 |   |-interface               # 业务接口
