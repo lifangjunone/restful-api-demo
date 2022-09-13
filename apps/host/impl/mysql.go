@@ -12,6 +12,7 @@ func NewHostServiceImpl() *HostServiceImpl {
 	logger, _ := zap.NewProduction()
 	defer logger.Sync()
 	sugar := logger.Sugar()
+	sugar.Named("host")
 	return &HostServiceImpl{
 		l: sugar,
 	}
