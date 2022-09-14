@@ -2,7 +2,10 @@ package impl
 
 import (
 	"context"
+	"fmt"
+	"github.com/stretchr/testify/assert"
 	"restful-api-demo/apps/host"
+	"restful-api-demo/conf"
 	"testing"
 )
 
@@ -12,12 +15,26 @@ var (
 )
 
 func TestHostCreate(t *testing.T) {
+	should := assert.New(t)
 	ins := host.NewHost()
 	ins.Name = "test"
-	service.CreateHost(context.Background(), ins)
+	ins.Id = "123456"
+	ins.Region = "beijing"
+	ins.Type = "11"
+	ins.CPU = 1
+	ins.Memory = 24
+	ins, err := service.CreateHost(context.Background(), ins)
+	if should.NoError(err) {
+		fmt.Println(ins)
+	}
 }
 
 func init() {
+	// 测试用例环境变量
+	err := conf.LoadConfigFromToml("../../../etc/demo.toml")
+	if err != nil {
+		panic(err)
+	}
 	// 接口的具体实现
 	service = NewHostServiceImpl()
 }
