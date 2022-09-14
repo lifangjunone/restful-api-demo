@@ -7,9 +7,9 @@ key = "this is you app key"
 [mysql]
 host = "127.0.0.1"
 port = "3306"
-username = "go_course"
-password = "xxxx"
-database = "go_course"
+username = "root"
+password = "123456"
+database = "test"
 
 [log]
 level = "debug"
