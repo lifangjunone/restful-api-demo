@@ -48,6 +48,10 @@ type Host struct {
 	*Describe
 }
 
+func (h *Host) Validate() error {
+	return nil
+}
+
 // Vendor 云服务商
 type Vendor int
 

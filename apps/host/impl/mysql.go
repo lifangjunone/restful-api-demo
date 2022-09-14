@@ -1,8 +1,10 @@
 package impl
 
 import (
+	"database/sql"
 	"go.uber.org/zap"
 	"restful-api-demo/apps/host"
+	"restful-api-demo/conf"
 )
 
 // 接口实现的静态检查
@@ -14,10 +16,12 @@ func NewHostServiceImpl() *HostServiceImpl {
 	sugar := logger.Sugar()
 	sugar.Named("host")
 	return &HostServiceImpl{
-		l: sugar,
+		l:  sugar,
+		db: conf.C().MySQL.GetDB(),
 	}
 }
 
 type HostServiceImpl struct {
-	l *zap.SugaredLogger
+	l  *zap.SugaredLogger
+	db *sql.DB
 }
