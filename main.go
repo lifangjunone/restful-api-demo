@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"restful-api-demo/cmd"
+)
 
 func main() {
-	fmt.Println("restful api demo")
+	if err := cmd.RootCmd.Execute(); err != nil {
+		fmt.Println(err)
+	}
 }

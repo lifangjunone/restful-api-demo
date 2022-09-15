@@ -55,6 +55,10 @@ type App struct {
 	Key  string `toml:"key" env:"APP_KEY"`
 }
 
+func (a *App) HttpAddr() string {
+	return fmt.Sprintf("%s:%s", a.Host, a.Port)
+}
+
 func NewDefaultMySQL() *MySQL {
 	return &MySQL{
 		Host:        "127.0.0.1",
