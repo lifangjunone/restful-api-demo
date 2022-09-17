@@ -2,10 +2,8 @@ package cmd
 
 import (
 	"errors"
-	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 	"restful-api-demo/apps"
-	"restful-api-demo/apps/host/http"
 	_ "restful-api-demo/apps/service_registry"
 	"restful-api-demo/conf"
 )
@@ -24,16 +22,7 @@ var StartCmd = &cobra.Command{
 		if err != nil {
 			panic(err)
 		}
-		// host service specify impl
-		// service := impl.NewHostServiceImpl()
-		// apps.HostService = impl.NewHostServiceImpl()
-		// 通过 Host Api Handler 提供 HTTP RestFul接口
-		// 服务初始化
 		apps.Init()
-		api := http.NewHostHandler()
-		g := gin.Default()
-		api.Registry(g)
-		g.Run(conf.C().App.HttpAddr())
 		return errors.New("no flags find")
 	},
 }
