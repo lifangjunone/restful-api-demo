@@ -18,7 +18,7 @@ type Handler struct {
 }
 
 func (h *Handler) Config() {
-	if apps.ServicesCenter[impl.HostSvc.Name()] == nil {
+	if apps.GetService(impl.HostSvc.Name()) == nil {
 		panic("dependence host service required")
 	}
 	h.svc = impl.HostSvc

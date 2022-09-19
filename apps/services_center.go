@@ -17,11 +17,19 @@ type Service interface {
 	InitService()
 }
 
+func GetService(name string) Service {
+	return ServicesCenter[name]
+}
+
 type HttpService interface {
 	Name() string
 	Registry(g gin.IRouter)
 	InitService()
 	Config()
+}
+
+func GetHttpService(name string) HttpService {
+	return HttpApps[name]
 }
 
 func Registry(svc Service) {
