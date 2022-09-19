@@ -8,9 +8,6 @@ import (
 	"restful-api-demo/version"
 )
 
-// HostSvc 接口实现的静态检查
-var HostSvc *HostServiceImpl
-
 func NewHostServiceImpl() *HostServiceImpl {
 	logger, _ := zap.NewProduction()
 	defer logger.Sync()
@@ -42,6 +39,6 @@ type HostServiceImpl struct {
 }
 
 func init() {
-	HostSvc = &HostServiceImpl{}
+	HostSvc := &HostServiceImpl{}
 	apps.Registry(HostSvc)
 }

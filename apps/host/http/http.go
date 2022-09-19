@@ -18,10 +18,11 @@ type Handler struct {
 }
 
 func (h *Handler) Config() {
-	if apps.GetService(impl.HostSvc.Name()) == nil {
+	svc := apps.GetService(version.Name)
+	if svc == nil {
 		panic("dependence host service required")
 	}
-	h.svc = impl.HostSvc
+	h.svc = svc.(*impl.HostServiceImpl)
 }
 
 func (h *Handler) Registry(r gin.IRouter) {
