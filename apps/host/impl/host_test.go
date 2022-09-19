@@ -18,7 +18,7 @@ func TestHostCreate(t *testing.T) {
 	should := assert.New(t)
 	ins := host.NewHost()
 	ins.Name = "test"
-	ins.Id = "ins-05"
+	ins.Id = "ins-061"
 	ins.Region = "beijing"
 	ins.Type = "11"
 	ins.CPU = 1

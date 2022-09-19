@@ -5,7 +5,6 @@ import (
 	"restful-api-demo/apps"
 	"restful-api-demo/apps/host"
 	"restful-api-demo/apps/host/impl"
-	"restful-api-demo/conf"
 	"restful-api-demo/version"
 )
 
@@ -33,10 +32,9 @@ func (h *Handler) Name() string {
 	return version.Name
 }
 
-func (h *Handler) InitService() {
-	g := gin.Default()
+func (h *Handler) InitService(g *gin.Engine) {
 	h.Registry(g)
-	g.Run(conf.C().App.HttpAddr())
+	// g.Run(conf.C().App.HttpAddr())
 }
 
 func init() {

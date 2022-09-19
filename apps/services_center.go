@@ -24,7 +24,7 @@ func GetService(name string) Service {
 type HttpService interface {
 	Name() string
 	Registry(g gin.IRouter)
-	InitService()
+	InitService(r *gin.Engine)
 	Config()
 }
 
@@ -46,12 +46,32 @@ func HttpRegistry(h HttpService) {
 	HttpApps[h.Name()] = h
 }
 
-func Init() {
+func Init(r *gin.Engine) {
 	for _, svc := range ServicesCenter {
 		svc.InitService()
 	}
 	for _, app := range HttpApps {
 		app.Config()
-		app.InitService()
+		app.InitService(r)
+	}
+}
+
+func LoadedGinApps() (names []string) {
+	for name := range HttpApps {
+		names = append(names, name)
+	}
+	return
+}
+
+func InitGin(r *gin.Engine) {
+	for _, app := range HttpApps {
+		app.Config()
+		app.InitService(r)
+	}
+}
+
+func InitImpl() {
+	for _, svc := range ServicesCenter {
+		svc.InitService()
 	}
 }
