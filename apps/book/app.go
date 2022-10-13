@@ -1,5 +1,5 @@
 package book
 
 const (
-	AppName = "Book"
+	AppName = "book"
 )
