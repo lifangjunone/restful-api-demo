@@ -1,4 +1,4 @@
-PROJECT_NAME=restful-api-demo
+PROJECT_NAME=github.com/lifangjunone/restful-api-demo
 MAIN_FILE=main.go
 
 dep: ## Get the dependencies

@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package request;
-option go_package = "restful-api-demo/common/pb/request";
+option go_package = "github.com/lifangjunone/restful-api-demo/common/pb/request";
 
 enum UpdateMode {
   PUT = 0;

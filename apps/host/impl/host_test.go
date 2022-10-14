@@ -3,9 +3,9 @@ package impl
 import (
 	"context"
 	"fmt"
+	"github.com/lifangjunone/restful-api-demo/apps/host"
+	"github.com/lifangjunone/restful-api-demo/conf"
 	"github.com/stretchr/testify/assert"
-	"restful-api-demo/apps/host"
-	"restful-api-demo/conf"
 	"testing"
 )
 

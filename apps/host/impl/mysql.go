@@ -2,10 +2,10 @@ package impl
 
 import (
 	"database/sql"
+	"github.com/lifangjunone/restful-api-demo/apps"
+	"github.com/lifangjunone/restful-api-demo/conf"
+	"github.com/lifangjunone/restful-api-demo/version"
 	"go.uber.org/zap"
-	"restful-api-demo/apps"
-	"restful-api-demo/conf"
-	"restful-api-demo/version"
 )
 
 func NewHostServiceImpl() *HostServiceImpl {

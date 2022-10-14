@@ -1,6 +1,6 @@
 package service_registry
 
 import (
-	_ "restful-api-demo/apps/host/http"
-	_ "restful-api-demo/apps/host/impl"
+	_ "github.com/lifangjunone/restful-api-demo/apps/host/http"
+	_ "github.com/lifangjunone/restful-api-demo/apps/host/impl"
 )

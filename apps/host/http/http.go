@@ -2,10 +2,10 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
-	"restful-api-demo/apps"
-	"restful-api-demo/apps/host"
-	"restful-api-demo/apps/host/impl"
-	"restful-api-demo/version"
+	"github.com/lifangjunone/restful-api-demo/apps"
+	"github.com/lifangjunone/restful-api-demo/apps/host"
+	"github.com/lifangjunone/restful-api-demo/apps/host/impl"
+	"github.com/lifangjunone/restful-api-demo/version"
 )
 
 // 通过写一个实体类，把内部的接口通过http协议暴露出去

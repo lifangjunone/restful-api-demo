@@ -2,9 +2,9 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/lifangjunone/restful-api-demo/apps/host"
+	"github.com/lifangjunone/restful-api-demo/response"
 	"net/http"
-	"restful-api-demo/apps/host"
-	"restful-api-demo/response"
 )
 
 // 用于暴露host service 接口

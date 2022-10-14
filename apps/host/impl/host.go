@@ -2,7 +2,7 @@ package impl
 
 import (
 	"context"
-	"restful-api-demo/apps/host"
+	"github.com/lifangjunone/restful-api-demo/apps/host"
 )
 
 // 业务逻辑层(Controller层)

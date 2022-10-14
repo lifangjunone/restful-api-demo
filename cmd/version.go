@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/lifangjunone/restful-api-demo/version"
 	"github.com/spf13/cobra"
-	"restful-api-demo/version"
 )
 
 var VersionCmd = &cobra.Command{

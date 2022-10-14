@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"restful-api-demo/cmd"
+	"github.com/lifangjunone/restful-api-demo/cmd"
 )
 
 func main() {

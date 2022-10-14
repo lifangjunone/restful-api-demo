@@ -3,7 +3,7 @@ package impl
 import (
 	"context"
 	"fmt"
-	"restful-api-demo/apps/host"
+	"github.com/lifangjunone/restful-api-demo/apps/host"
 )
 
 // 把Host保存数据库

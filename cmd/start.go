@@ -1,14 +1,14 @@
 package cmd
 
 import (
+	"github.com/lifangjunone/restful-api-demo/apps"
+	_ "github.com/lifangjunone/restful-api-demo/apps/service_registry"
+	"github.com/lifangjunone/restful-api-demo/conf"
+	"github.com/lifangjunone/restful-api-demo/protocol"
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 	"os"
 	"os/signal"
-	"restful-api-demo/apps"
-	_ "restful-api-demo/apps/service_registry"
-	"restful-api-demo/conf"
-	"restful-api-demo/protocol"
 	"syscall"
 )
 

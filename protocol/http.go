@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/lifangjunone/restful-api-demo/apps"
+	"github.com/lifangjunone/restful-api-demo/conf"
 	"go.uber.org/zap"
 	"net/http"
-	"restful-api-demo/apps"
-	"restful-api-demo/conf"
 	"time"
 )
 
