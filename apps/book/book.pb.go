@@ -30,19 +30,19 @@ type Book struct {
 
 	// 唯一ID
 	// @gotags: json:"id" bson:"_id"
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id" bson:"_id"`
 	// 录入时间
 	// @gotags: json:"create_at" bson:"create_at"
-	CreateAt int64 `protobuf:"varint,2,opt,name=create_at,json=createAt,proto3" json:"create_at,omitempty"`
+	CreateAt int64 `protobuf:"varint,2,opt,name=create_at,json=createAt,proto3" json:"create_at" bson:"create_at"`
 	// 更新时间
 	// @gotags: json:"update_at" bson:"update_at"
-	UpdateAt int64 `protobuf:"varint,3,opt,name=update_at,json=updateAt,proto3" json:"update_at,omitempty"`
+	UpdateAt int64 `protobuf:"varint,3,opt,name=update_at,json=updateAt,proto3" json:"update_at" bson:"update_at"`
 	// 更新人
 	// @gotags: json:"update_by" bson:"update_by"
-	UpdateBy string `protobuf:"bytes,4,opt,name=update_by,json=updateBy,proto3" json:"update_by,omitempty"`
+	UpdateBy string `protobuf:"bytes,4,opt,name=update_by,json=updateBy,proto3" json:"update_by" bson:"update_by"`
 	// 书本信息
 	// @gotags: json:"data" bson:"data"
-	Data *CreateBookRequest `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`
+	Data *CreateBookRequest `protobuf:"bytes,5,opt,name=data,proto3" json:"data" bson:"data"`
 }
 
 func (x *Book) Reset() {
@@ -119,13 +119,13 @@ type CreateBookRequest struct {
 
 	// 创建人
 	// @gotags: json:"create_by" bson:"create_by"
-	CreateBy string `protobuf:"bytes,1,opt,name=create_by,json=createBy,proto3" json:"create_by,omitempty"`
+	CreateBy string `protobuf:"bytes,1,opt,name=create_by,json=createBy,proto3" json:"create_by" bson:"create_by"`
 	// 名称
 	// @gotags: json:"name" bson:"name" validate:"required"
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name" bson:"name" validate:"required"`
 	// 作者
 	// @gotags: json:"author" bson:"author" validate:"required"
-	Author string `protobuf:"bytes,3,opt,name=author,proto3" json:"author,omitempty"`
+	Author string `protobuf:"bytes,3,opt,name=author,proto3" json:"author" bson:"author" validate:"required"`
 }
 
 func (x *CreateBookRequest) Reset() {
@@ -188,10 +188,10 @@ type QueryBookRequest struct {
 
 	// 分页参数
 	// @gotags: json:"page"
-	Page *page.PageRequest `protobuf:"bytes,1,opt,name=page,proto3" json:"page,omitempty"`
+	Page *page.PageRequest `protobuf:"bytes,1,opt,name=page,proto3" json:"page"`
 	// 关键字参数
 	// @gotags: json:"keywords"
-	Keywords string `protobuf:"bytes,2,opt,name=keywords,proto3" json:"keywords,omitempty"`
+	Keywords string `protobuf:"bytes,2,opt,name=keywords,proto3" json:"keywords"`
 }
 
 func (x *QueryBookRequest) Reset() {
@@ -248,10 +248,10 @@ type BookSet struct {
 
 	// 分页时，返回总数量
 	// @gotags: json:"total"
-	Total int64 `protobuf:"varint,1,opt,name=total,proto3" json:"total,omitempty"`
+	Total int64 `protobuf:"varint,1,opt,name=total,proto3" json:"total"`
 	// 一页的数据
 	// @gotags: json:"items"
-	Items []*Book `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
+	Items []*Book `protobuf:"bytes,2,rep,name=items,proto3" json:"items"`
 }
 
 func (x *BookSet) Reset() {
@@ -307,7 +307,7 @@ type DescribeBookRequest struct {
 
 	// book id
 	// @gotags: json:"id"
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id"`
 }
 
 func (x *DescribeBookRequest) Reset() {
@@ -356,19 +356,19 @@ type UpdateBookRequest struct {
 
 	// book id
 	// @gotags: json:"id"
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id"`
 	// 更新模式
 	// @gotags: json:"update_mode"
-	UpdateMode request.UpdateMode `protobuf:"varint,2,opt,name=update_mode,json=updateMode,proto3,enum=request.UpdateMode" json:"update_mode,omitempty"`
+	UpdateMode request.UpdateMode `protobuf:"varint,2,opt,name=update_mode,json=updateMode,proto3,enum=request.UpdateMode" json:"update_mode"`
 	// 更新人
 	// @gotags: json:"update_by"
-	UpdateBy string `protobuf:"bytes,3,opt,name=update_by,json=updateBy,proto3" json:"update_by,omitempty"`
+	UpdateBy string `protobuf:"bytes,3,opt,name=update_by,json=updateBy,proto3" json:"update_by"`
 	// 更新时间
 	// @gotags: json:"update_at"
-	UpdateAt int64 `protobuf:"varint,4,opt,name=update_at,json=updateAt,proto3" json:"update_at,omitempty"`
+	UpdateAt int64 `protobuf:"varint,4,opt,name=update_at,json=updateAt,proto3" json:"update_at"`
 	// 更新的书本信息
 	// @gotags: json:"data"
-	Data *CreateBookRequest `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`
+	Data *CreateBookRequest `protobuf:"bytes,5,opt,name=data,proto3" json:"data"`
 }
 
 func (x *UpdateBookRequest) Reset() {
@@ -445,7 +445,7 @@ type DeleteBookRequest struct {
 
 	// book id
 	// @gotags: json:"id"
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id"`
 }
 
 func (x *DeleteBookRequest) Reset() {
