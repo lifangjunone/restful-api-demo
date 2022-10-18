@@ -2,6 +2,7 @@ package apps
 
 import (
 	"fmt"
+	"github.com/emicklei/go-restful/v3"
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
 )
@@ -9,9 +10,10 @@ import (
 // 服务注册
 
 var (
-	ServicesCenter map[string]Service     = make(map[string]Service, 10)
-	HttpApps       map[string]HttpService = make(map[string]HttpService, 10)
-	GrpcApps       map[string]GrpcService = make(map[string]GrpcService, 10)
+	ServicesCenter map[string]Service        = make(map[string]Service, 10)
+	HttpApps       map[string]HttpService    = make(map[string]HttpService, 10)
+	GrpcApps       map[string]GrpcService    = make(map[string]GrpcService, 10)
+	RestfulApps    map[string]RestfulService = make(map[string]RestfulService, 10)
 )
 
 type Service interface {
@@ -36,8 +38,18 @@ type GrpcService interface {
 	Config()
 }
 
+type RestfulService interface {
+	Name() string
+	Registry(ws *restful.WebService)
+	Config()
+}
+
 func GetHttpService(name string) HttpService {
 	return HttpApps[name]
+}
+
+func GetGrpcService(name string) GrpcService {
+	return GrpcApps[name]
 }
 
 func Registry(svc Service) {
@@ -61,6 +73,13 @@ func GrpcRegistry(h GrpcService) {
 	GrpcApps[h.Name()] = h
 }
 
+func RestfulRegistry(h RestfulService) {
+	if _, ok := RestfulApps[h.Name()]; ok {
+		panic(fmt.Sprintf("%s registry yet", h.Name()))
+	}
+	RestfulApps[h.Name()] = h
+}
+
 func LoadGinApps() (names []string) {
 	for name := range HttpApps {
 		names = append(names, name)
@@ -70,6 +89,13 @@ func LoadGinApps() (names []string) {
 
 func LoadGrpcApps() (names []string) {
 	for name := range GrpcApps {
+		names = append(names, name)
+	}
+	return
+}
+
+func LoadRestfulApps() (names []string) {
+	for name := range RestfulApps {
 		names = append(names, name)
 	}
 	return
@@ -86,6 +112,15 @@ func InitGrpc(r *grpc.Server) {
 	for _, app := range GrpcApps {
 		app.Config()
 		app.Registry(r)
+	}
+}
+
+func InitRestful(r *restful.Container) {
+	for _, app := range RestfulApps {
+		app.Config()
+		ws := new(restful.WebService)
+		r.Add(ws)
+		app.Registry(ws)
 	}
 }
 

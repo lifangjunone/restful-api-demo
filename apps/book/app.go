@@ -12,6 +12,7 @@ import (
 
 const (
 	AppName = "book"
+	Version = "v0.0.1"
 )
 
 var (

@@ -34,6 +34,7 @@ var StartCmd = &cobra.Command{
 		signal.Notify(ch, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGHUP, syscall.SIGINT)
 		go httpSvc.WaitStop(ch)
 		go httpSvc.grpc.Start()
+		go httpSvc.restful.Start()
 		return httpSvc.Start()
 	},
 }
@@ -44,16 +45,18 @@ func NewManager() *manager {
 	sugar := logger.Sugar()
 	sugar.Named("CLI")
 	return &manager{
-		http: protocol.NewHttpService(),
-		grpc: protocol.NewGRPCService(),
-		l:    sugar,
+		restful: protocol.NewRestfulService(),
+		http:    protocol.NewHttpService(),
+		grpc:    protocol.NewGRPCService(),
+		l:       sugar,
 	}
 }
 
 type manager struct {
-	http *protocol.HttpService
-	grpc *protocol.GRPCService
-	l    *zap.SugaredLogger
+	restful *protocol.RestfulService
+	http    *protocol.HttpService
+	grpc    *protocol.GRPCService
+	l       *zap.SugaredLogger
 }
 
 func (m *manager) Start() error {
@@ -76,6 +79,7 @@ func (m *manager) WaitStop(ch <-chan os.Signal) {
 		}
 		m.grpc.Stop()
 		m.http.Stop()
+		m.restful.Stop()
 	}
 }
 
