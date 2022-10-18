@@ -3,6 +3,7 @@ package apps
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"google.golang.org/grpc"
 )
 
 // 服务注册
@@ -10,6 +11,7 @@ import (
 var (
 	ServicesCenter map[string]Service     = make(map[string]Service, 10)
 	HttpApps       map[string]HttpService = make(map[string]HttpService, 10)
+	GrpcApps       map[string]GrpcService = make(map[string]GrpcService, 10)
 )
 
 type Service interface {
@@ -25,6 +27,12 @@ type HttpService interface {
 	Name() string
 	Registry(g gin.IRouter)
 	InitService(r *gin.Engine)
+	Config()
+}
+
+type GrpcService interface {
+	Name() string
+	Registry(r *grpc.Server)
 	Config()
 }
 
@@ -44,6 +52,13 @@ func HttpRegistry(h HttpService) {
 		panic(fmt.Sprintf("%s registry yet", h.Name()))
 	}
 	HttpApps[h.Name()] = h
+}
+
+func GrpcRegistry(h GrpcService) {
+	if _, ok := GrpcApps[h.Name()]; ok {
+		panic(fmt.Sprintf("%s registry yet", h.Name()))
+	}
+	GrpcApps[h.Name()] = h
 }
 
 func Init(r *gin.Engine) {
@@ -67,6 +82,13 @@ func InitGin(r *gin.Engine) {
 	for _, app := range HttpApps {
 		app.Config()
 		app.InitService(r)
+	}
+}
+
+func InitGrpc(r *grpc.Server) {
+	for _, app := range GrpcApps {
+		app.Config()
+		app.Registry(r)
 	}
 }
 

@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"github.com/infraboard/mcube/logger"
 	"github.com/infraboard/mcube/logger/zap"
+	"github.com/lifangjunone/restful-api-demo/apps"
 	"google.golang.org/grpc"
 
 	"github.com/lifangjunone/restful-api-demo/apps/book"
@@ -22,11 +23,11 @@ type service struct {
 	book.UnimplementedServiceServer
 }
 
-func (s *service) Config() error {
+func (s *service) Config() {
 	db := conf.C().MySQL.GetDB()
 	s.log = zap.L().Named(s.Name())
 	s.db = db
-	return nil
+	return
 }
 
 func (s *service) Name() string {
@@ -37,7 +38,6 @@ func (s *service) Registry(server *grpc.Server) {
 	book.RegisterServiceServer(server, svr)
 }
 
-//
-//func init() {
-//	app.RegistryGrpcApp(svr)
-//}
+func init() {
+	apps.GrpcRegistry(svr)
+}
