@@ -33,6 +33,7 @@ var StartCmd = &cobra.Command{
 		ch := make(chan os.Signal, 1)
 		signal.Notify(ch, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGHUP, syscall.SIGINT)
 		go httpSvc.WaitStop(ch)
+		go httpSvc.grpc.Start()
 		return httpSvc.Start()
 	},
 }
@@ -44,12 +45,14 @@ func NewManager() *manager {
 	sugar.Named("CLI")
 	return &manager{
 		http: protocol.NewHttpService(),
+		grpc: protocol.NewGRPCService(),
 		l:    sugar,
 	}
 }
 
 type manager struct {
 	http *protocol.HttpService
+	grpc *protocol.GRPCService
 	l    *zap.SugaredLogger
 }
 
@@ -71,6 +74,7 @@ func (m *manager) WaitStop(ch <-chan os.Signal) {
 		default:
 			m.l.Infof("received signal: %s", v)
 		}
+		m.grpc.Stop()
 		m.http.Stop()
 	}
 }

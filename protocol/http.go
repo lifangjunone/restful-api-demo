@@ -18,6 +18,7 @@ type HttpService struct {
 }
 
 func NewHttpService() *HttpService {
+	//gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 	server := &http.Server{
 		ReadHeaderTimeout: 60 * time.Second,
@@ -43,8 +44,7 @@ func NewHttpService() *HttpService {
 func (s *HttpService) Start() error {
 	// 加载Handler,
 	apps.InitGin(s.r)
-	apps := apps.LoadedGinApps()
-	s.l.Infof("loaded gin apps: %v", apps)
+	s.l.Infof("HTTP 服务监听地址: %s", s.server.Addr)
 	if err := s.server.ListenAndServe(); err != nil {
 		if err == http.ErrServerClosed {
 			s.l.Info("service stopped")

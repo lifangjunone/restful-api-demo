@@ -61,18 +61,15 @@ func GrpcRegistry(h GrpcService) {
 	GrpcApps[h.Name()] = h
 }
 
-func Init(r *gin.Engine) {
-	for _, svc := range ServicesCenter {
-		svc.InitService()
+func LoadGinApps() (names []string) {
+	for name := range HttpApps {
+		names = append(names, name)
 	}
-	for _, app := range HttpApps {
-		app.Config()
-		app.InitService(r)
-	}
+	return
 }
 
-func LoadedGinApps() (names []string) {
-	for name := range HttpApps {
+func LoadGrpcApps() (names []string) {
+	for name := range GrpcApps {
 		names = append(names, name)
 	}
 	return
